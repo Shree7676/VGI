@@ -24,7 +24,7 @@ function App() {
 
   return (
     <Router>
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ zIndex: 1300 }}>
         <Toolbar>
           {/* Hamburger menu for mobile */}
           <IconButton
