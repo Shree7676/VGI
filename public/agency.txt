@@ -1,0 +1,2 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone
+80,Verkehrsverbund Großraum Ingolstadt AöR,http://www.vgi.de,Europe/Berlin,de,+49 841 97439333

@@ -1,0 +1,2 @@
+feed_id,feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_version,conv_rev,plan_rev, feed_contact_url
+0,Verkehrsverbund Großraum Ingolstadt AöR,http://www.vgi.de,de,20231210,20241214,2024-10-18,1.173,,http://www.vgi.de
