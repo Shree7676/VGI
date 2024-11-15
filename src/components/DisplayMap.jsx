@@ -93,72 +93,75 @@ function DisplayMap() {
   };
 
   return (
-    <MapContainer center={defaultPosition} zoom={10} style={{ height: '100vh', width: '100%' }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
+    <div>
+      <h1>Static content</h1>
+      <MapContainer center={defaultPosition} zoom={10} style={{ height: '100vh', width: '100%' }}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
 
-      <ZoomListener />
+        <ZoomListener />
 
-      {dataLoaded && zoomLevel >= zoomThreshold && memoizedStops.map((stop) => {
-        const { stop_lat, stop_lon, stop_name, stop_id } = stop;
-        if (stop_lat && stop_lon) {
-          return (
-            <Marker
-              key={stop_id}
-              position={[parseFloat(stop_lat), parseFloat(stop_lon)]}
-              icon={new L.Icon({
-                iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41],
-              })}
-            >
-              <Popup>
-                <div style={{ width: '250px' }}>
-                  <strong>{stop_name}</strong>
-                  <br />
-                  Stop ID: {stop_id}
-                  <br />
-                  <div>
-                    {topTripsLookup.current[stop_id]?.map((trip, index) => (
-                      <div key={index}>
-                        <div style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          padding: '5px 0',
-                          borderBottom: '1px solid #ddd', // Optional: Adds a separator between trips
-                        }}>
-                          <span
-                            onClick={() => handleTripClick(trip.tripId, stop_id)}
-                            style={{
-                              color: 'blue',
-                              cursor: 'pointer',
-                              textDecoration: 'underline',
-                              flex: 1, // Ensures the trip name takes the left space
-                            }}
-                          >
-                            {trip.tripHeadsign}
-                          </span>
-                          <span style={{ fontSize: '0.9em', color: '#555' }}>{trip.arrival}</span>
+        {dataLoaded && zoomLevel >= zoomThreshold && memoizedStops.map((stop) => {
+          const { stop_lat, stop_lon, stop_name, stop_id } = stop;
+          if (stop_lat && stop_lon) {
+            return (
+              <Marker
+                key={stop_id}
+                position={[parseFloat(stop_lat), parseFloat(stop_lon)]}
+                icon={new L.Icon({
+                  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+                  iconSize: [25, 41],
+                  iconAnchor: [12, 41],
+                  popupAnchor: [1, -34],
+                  shadowSize: [41, 41],
+                })}
+              >
+                <Popup>
+                  <div style={{ width: '250px' }}>
+                    <strong>{stop_name}</strong>
+                    <br />
+                    Stop ID: {stop_id}
+                    <br />
+                    <div>
+                      {topTripsLookup.current[stop_id]?.map((trip, index) => (
+                        <div key={index}>
+                          <div style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            padding: '5px 0',
+                            borderBottom: '1px solid #ddd', // Optional: Adds a separator between trips
+                          }}>
+                            <span
+                              onClick={() => handleTripClick(trip.tripId, stop_id)}
+                              style={{
+                                color: 'blue',
+                                cursor: 'pointer',
+                                textDecoration: 'underline',
+                                flex: 1, // Ensures the trip name takes the left space
+                              }}
+                            >
+                              {trip.tripHeadsign}
+                            </span>
+                            <span style={{ fontSize: '0.9em', color: '#555' }}>{trip.arrival}</span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </Popup>
-            </Marker>
-          );
-        }
-        return null;
-      })}
+                </Popup>
+              </Marker>
+            );
+          }
+          return null;
+        })}
 
-      {/* Render the polyline for the selected trip */}
-      {selectedTripId && <RoutePolyline tripId={selectedTripId} />}
-    </MapContainer>
+        {/* Render the polyline for the selected trip */}
+        {selectedTripId && <RoutePolyline tripId={selectedTripId} />}
+      </MapContainer>
+    </div>
   );
 }
 
